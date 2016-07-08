@@ -18,8 +18,10 @@ import android.widget.Toast;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.langdunzx.www.zanbei.R;
@@ -28,6 +30,7 @@ import com.langdunzx.www.zanbei.utils.CheckUtil;
 import com.langdunzx.www.zanbei.utils.ClickUtil;
 import com.langdunzx.www.zanbei.utils.HttpUtils;
 import com.langdunzx.www.zanbei.utils.MD5;
+import com.langdunzx.www.zanbei.utils.OkHttpUtils;
 import com.squareup.okhttp.FormEncodingBuilder;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
@@ -58,13 +61,16 @@ public class LoginActivity extends BaseFragmentActivity {
             if(msg.what == 1){
                 String s = (String) msg.obj;
                 Toast.makeText(LoginActivity.this,s.toString(),Toast.LENGTH_SHORT).show();
+            }else if(msg.what == 2){
+
             }
         }
     };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentViewWithActionBar(R.layout.activity_login,"登录 | 注册");
+        //setContentView(R.layout.activity_login);
         mShareAPI = UMShareAPI.get(this);//初始化友盟分享
         initView();
         // 删除授权接口
@@ -123,28 +129,10 @@ public class LoginActivity extends BaseFragmentActivity {
                             umAuthListener);
                     break;
                 case R.id.login_but:
-                    Toast.makeText(LoginActivity.this,"进来了",Toast.LENGTH_SHORT).show();
-                    Date date=new Date();
-                    DateFormat format = new SimpleDateFormat("yyyyMMdd");
-                    String time = format.format(date);
-                    String uid = "13810250440";
-                    String tokenOne = time + uid;
-                    String tokenTwo = MD5.MD5(tokenOne);
-                    String token = MD5.MD5(tokenTwo);
-
-                    String url = "http://langdunedu.com/api/"; //这是URL
-                    requestTag = "volley_get";
-                    Map<String, String> hashMap = new HashMap<String, String>();
-                    //参数
-                    hashMap.put("action", "reglogin");
-                    hashMap.put("token", token);
-                    hashMap.put("uid", "13810250440");
-                    hashMap.put("password", "");
-                    hashMap.put("pw", "");
-
+                    new AsnyckLogin().execute();
                     break;
                 case R.id.login_but1:
-                        new AsnyckLogin().execute();
+                    lOGON();
                     break;
                 default:
                     break;
@@ -153,6 +141,44 @@ public class LoginActivity extends BaseFragmentActivity {
 
     };
 
+    /**
+     * 封装好的okHttp
+     */
+    private void lOGON(){
+        String url = String.format("http://langdunedu.com/api/");
+        Date date = new Date();
+        DateFormat format = new SimpleDateFormat("yyyyMMdd");
+        String time = format.format(date);
+        String uid = etUserName.getText().toString();
+        String tokenOne = time + uid;
+        String tokenTwo = MD5.MD5(tokenOne);
+        String token = MD5.MD5(tokenTwo);
+        List<OkHttpUtils.Param> list = new ArrayList<OkHttpUtils.Param>();
+        list.add(new OkHttpUtils.Param("action","reglogin"));
+        list.add(new OkHttpUtils.Param("token",token));
+        list.add(new OkHttpUtils.Param("uid",uid));
+        list.add(new OkHttpUtils.Param("password",""));
+        list.add(new OkHttpUtils.Param("pw",""));
+        OkHttpUtils.post(url, new OkHttpUtils.ResultCallback() {
+            @Override
+            public void onSuccess(Object response) {
+                if(response!=null){
+                    //成功干的事情
+                    handler.obtainMessage(1,response).sendToTarget();
+                }
+            }
+
+            @Override
+            public void onFailure(Exception e) {
+                //失败错误信息
+                handler.obtainMessage(2,e.toString()).sendToTarget();
+            }
+        },list);
+    }
+
+    /***
+     * 最原生的okHttp-Post请求
+     */
     private class AsnyckLogin extends AsyncTask<String, Void, String> {
         HttpUtils http = new HttpUtils();
         OkHttpClient client = new OkHttpClient();
@@ -167,18 +193,17 @@ public class LoginActivity extends BaseFragmentActivity {
             String tokenOne = time + uid;
             String tokenTwo = MD5.MD5(tokenOne);
             String token = MD5.MD5(tokenTwo);
-
             String url = String.format("http://langdunedu.com/api/");
-            RequestBody formBody = new FormEncodingBuilder()
+            RequestBody formBody = new FormEncodingBuilder()  //post方式
                     .add("action", "reglogin")
                     .add("token", token)
                     .add("uid", "13810250440")
                     .add("password", "")
                     .add("pw", "")
                     .build();
-            Request request = new Request.Builder().url(url).post(formBody).build();
+            Request request = new Request.Builder().url(url).post(formBody).build(); //请求服务器
             try {
-                Response response = client.newCall(request).execute();
+                Response response = client.newCall(request).execute();//获取到返回值
                 if (response.isSuccessful()) {
                     json = response.body().string();
                 } else {
@@ -188,10 +213,7 @@ public class LoginActivity extends BaseFragmentActivity {
                 e.printStackTrace();
             }
             if (json != null) {
-                Message message = new Message();
-                message.what = 1;
-                message.obj = json;
-                handler.sendMessage(message);
+                handler.obtainMessage(1,json).sendToTarget();
             } else {
 
             }

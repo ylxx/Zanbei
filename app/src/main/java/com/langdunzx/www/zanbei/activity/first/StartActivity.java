@@ -43,7 +43,7 @@ public class StartActivity extends BaseFragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentViewWithActionBar(R.layout.activity_start,"daohang");
+        setContentViewWithActionBar(R.layout.activity_start,"导航");
         toolbar.inflateMenu(R.menu.menu_toolbar_base);
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
