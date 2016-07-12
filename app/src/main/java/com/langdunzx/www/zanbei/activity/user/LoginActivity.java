@@ -50,7 +50,7 @@ public class LoginActivity extends BaseFragmentActivity {
     private EditText etUserName,etCode,etUserPaw;
     private LinearLayout llCode;
     private Button btLogin,login_but,login_but1   ;
-    private String userName, userPw, userCode, Codeboolean;
+    private String userName, userPw, userCode;
     private ImageView img_wx,img_qq,img_sina;
     private String requestTag = "";
     private TextView tv_data;
@@ -101,17 +101,24 @@ public class LoginActivity extends BaseFragmentActivity {
      * 监听事件
      *
      */
+    String Codeboolean = "1";
+    int i=0;
     private OnClickListener listener = new OnClickListener() {
 
         @Override
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.bt_login:
-                    // 登陆请求
+                    // 登陆请求.
                     confirmLogin();
-                    /*if (Codeboolean.equals("1")) {
+                    lOGON();
+                    if (i == 0) {
+                        i++;
                         llCode.setVisibility(View.VISIBLE);
-                    }*/
+                    }else{
+                        i = 0;
+                        llCode.setVisibility(View.GONE);
+                    }
                     break;
                 case R.id.imageView_weixin:
                     // 授权微信
@@ -158,7 +165,7 @@ public class LoginActivity extends BaseFragmentActivity {
         list.add(new OkHttpUtils.Param("token",token));
         list.add(new OkHttpUtils.Param("uid",uid));
         list.add(new OkHttpUtils.Param("password",""));
-        list.add(new OkHttpUtils.Param("pw",""));
+        list.add(new OkHttpUtils.Param("pw",""+etCode.getText().toString()));
         OkHttpUtils.post(url, new OkHttpUtils.ResultCallback() {
             @Override
             public void onSuccess(Object response) {
@@ -241,9 +248,9 @@ public class LoginActivity extends BaseFragmentActivity {
             return;
         }
 
-        HashMap<String, String> hashmap = new HashMap<String, String>();
-        hashmap.put("name", etUserName.getText().toString());
-        hashmap.put("password", etUserName.getText().toString());
+        //HashMap<String, String> hashmap = new HashMap<String, String>();
+        //hashmap.put("name", etUserName.getText().toString());
+        //hashmap.put("password", etUserName.getText().toString());
 //        new RequestCommant()
 //                .requestlogin(new requetHandle(this), this, hashmap);
     }
