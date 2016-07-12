@@ -1,5 +1,6 @@
 package com.langdunzx.www.zanbei.fragment;
 
+import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -14,6 +15,7 @@ import android.widget.Toast;
 import android.widget.Toolbar;
 
 import com.langdunzx.www.zanbei.R;
+import com.langdunzx.www.zanbei.activity.user.MyOwnActivity;
 import com.langdunzx.www.zanbei.fragment.homepage.VpSimpleFragment;
 import com.langdunzx.www.zanbei.fragment.homepage.VpSimpleFragmentA;
 import com.langdunzx.www.zanbei.fragment.homepage.VpSimpleFragmentB;
@@ -32,7 +34,7 @@ public class HomePageFragment extends Fragment {
     private List<VpSimpleFragment> mContents = new ArrayList<VpSimpleFragment>();
     //	private FragmentPagerAdapter mAdapter;
     private FragmentPagerAdapter mAdapter;
-    private ImageView ivToMain;
+    private ImageView ivToMain,ivToOwn,ivXiaoXi,ivSaoMa;
     private View view;
     @Nullable
     @Override
@@ -102,8 +104,13 @@ public class HomePageFragment extends Fragment {
     private void initViews() {
         mViewPager = (ViewPager) view.findViewById(R.id.id_viewPager);
         mIndictor = (ViewPagerIndictor) view.findViewById(R.id.id_indictor);
+        ivSaoMa = (ImageView) view.findViewById(R.id.iv_saoma);
+        ivToOwn = (ImageView) view.findViewById(R.id.iv_to_own);
+        ivXiaoXi = (ImageView) view.findViewById(R.id.iv_xiaoxi);
+
+
         //ivToMain = (ImageView) view.findViewById(R.id.fragment_homepage_rightbar);
-        ClickUtil.setClickListener(listener, ivToMain);
+        ClickUtil.setClickListener(listener, ivToMain,ivSaoMa,ivToOwn,ivXiaoXi);
 
     }
 
@@ -114,9 +121,9 @@ public class HomePageFragment extends Fragment {
         @Override
         public void onClick(View v) {
             switch (v.getId()) {
-                //case R.id.fragment_homepage_rightbar:
-                  //  startActivity(new Intent(getActivity(),MyOwnActivity.class));
-                   // break;
+                case R.id.iv_to_own:
+                    startActivity(new Intent(getActivity(),MyOwnActivity.class));
+                    break;
                 default:
                     break;
             }

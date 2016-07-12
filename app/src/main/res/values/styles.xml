@@ -13,6 +13,33 @@
         <item name="android:windowBackground">@drawable/sp_waiting_dialog_bg</item>
     </style>
 
+    <style name="item_news_information">
+        <item name="android:textColor">@color/txt_color</item>
+        <item name="android:textSize">20sp</item>
+        <!--<item name="android:textStyle">bold</item>-->
+        <item name="android:shadowColor">#44000000</item>
+        <item name="android:shadowDx">1</item>
+        <item name="android:shadowDy">1</item>
+        <item name="android:shadowRadius">1</item>
+    </style>
+
+    <style name="tweetText">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColorLink">#778085</item>
+    </style>
+
+    <style name="tweetDate">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">#FFAAAAAA</item>
+    </style>
+
+    <style name="bg">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">@color/mian_bg</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
     <style name="myDialogTheme" parent="@android:style/Theme.Dialog">
         <item name="android:windowBackground">@drawable/shape_circle_white</item>
         <item name="android:layout_width">wrap_content</item>

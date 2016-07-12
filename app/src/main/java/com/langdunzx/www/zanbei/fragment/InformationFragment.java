@@ -23,6 +23,7 @@ import com.langdunzx.www.zanbei.application.LangDunApplication;
 import com.langdunzx.www.zanbei.bean.ChannelManage;
 import com.langdunzx.www.zanbei.fragment.Information.NewsFragment;
 import com.langdunzx.www.zanbei.fragment.Information.NewsHotFragment;
+import com.langdunzx.www.zanbei.fragment.Information.NewsInformationFragment;
 import com.langdunzx.www.zanbei.newsUtils.ChannelItem;
 import com.langdunzx.www.zanbei.utils.BaseTools;
 import com.langdunzx.www.zanbei.view.ColumnHorizontalScrollView;
@@ -213,7 +214,7 @@ public class InformationFragment extends Fragment {
                 Bundle data = new Bundle();
                 data.putString("text", userChannelList.get(i).getName());
                 data.putInt("id", userChannelList.get(i).getId());
-                NewsFragment newfragment = new NewsFragment();
+                NewsInformationFragment newfragment = new NewsInformationFragment();
                 newfragment.setArguments(data);
                 fragments.add(newfragment);
             }
