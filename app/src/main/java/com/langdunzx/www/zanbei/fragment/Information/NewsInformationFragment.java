@@ -58,7 +58,7 @@ public class NewsInformationFragment extends BaseBackFragment implements BaseQui
         /**
          * 添加动画
          */
-        mAdapter.openLoadAnimation(BaseQuickAdapter.SCALEIN);
+        mAdapter.openLoadAnimation(BaseQuickAdapter.ALPHAIN);
         /**
          * 动画加载方式
          */
