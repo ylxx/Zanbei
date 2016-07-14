@@ -4,15 +4,14 @@ import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
 import com.langdunzx.www.zanbei.R;
 import com.langdunzx.www.zanbei.activity.user.MyOwnActivity;
@@ -30,17 +29,16 @@ import java.util.List;
 public class HomePageFragment extends Fragment {
     private ViewPager mViewPager;
     private ViewPagerIndictor mIndictor;
-    private List<String> mTitles = Arrays.asList("课程分类1", "课程分类2", "课程分类3");
+    private List<String> mTitles ;
     private List<VpSimpleFragment> mContents = new ArrayList<VpSimpleFragment>();
-    //	private FragmentPagerAdapter mAdapter;
     private FragmentPagerAdapter mAdapter;
-    private ImageView ivToMain,ivToOwn,ivXiaoXi,ivSaoMa;
+    private ImageView ivToOwn,ivXiaoXi,ivSaoMa;
     private View view;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_homepage,null);
-
+        mTitles = Arrays.asList("课程分类1", "课程分类2", "课程分类3");
         initViews();
         initDatas();
 
@@ -92,6 +90,7 @@ public class HomePageFragment extends Fragment {
             }
         });
 
+
         return view;
     }
     @Override
@@ -107,10 +106,8 @@ public class HomePageFragment extends Fragment {
         ivSaoMa = (ImageView) view.findViewById(R.id.iv_saoma);
         ivToOwn = (ImageView) view.findViewById(R.id.iv_to_own);
         ivXiaoXi = (ImageView) view.findViewById(R.id.iv_xiaoxi);
-
-
         //ivToMain = (ImageView) view.findViewById(R.id.fragment_homepage_rightbar);
-        ClickUtil.setClickListener(listener, ivToMain,ivSaoMa,ivToOwn,ivXiaoXi);
+        ClickUtil.setClickListener(listener,ivSaoMa,ivToOwn,ivXiaoXi);
 
     }
 
@@ -136,7 +133,7 @@ public class HomePageFragment extends Fragment {
         mAdapter = new FragmentPagerAdapter(getChildFragmentManager()) {
             @Override
             public int getCount() {
-                return  mTitles.size();
+                return  3;
             }
 
             @Override

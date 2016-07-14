@@ -51,7 +51,6 @@
         </LinearLayout>
 
     </RelativeLayout>
-
     <com.langdunzx.www.zanbei.view.ViewPagerIndictor
         android:id="@+id/id_indictor"
         android:layout_width="match_parent"
