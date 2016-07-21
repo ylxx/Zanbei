@@ -80,7 +80,7 @@ public class DragGrid extends GridView {
 	private int mVerticalSpacing = 15;
 	/* 移动时候最后个动画的ID */
 	private String LastAnimationID;
-	
+
 	public DragGrid(Context context) {
 		super(context);
 		init(context);
@@ -101,7 +101,7 @@ public class DragGrid extends GridView {
 		//将布局文件中设置的间距dip转为px
 		mHorizontalSpacing = DataTools.dip2px(context, mHorizontalSpacing);
 	}
-	
+
 	@Override
 	public boolean onInterceptTouchEvent(MotionEvent ev) {
 		// TODO Auto-generated method stub
@@ -152,7 +152,7 @@ public class DragGrid extends GridView {
 		}
 		return super.onTouchEvent(ev);
 	}
-	
+
 	/** 在拖动的情况 */
 	private void onDrag(int x, int y , int rawx , int rawy) {
 		if (dragImageView != null) {
@@ -246,15 +246,15 @@ public class DragGrid extends GridView {
 //		windowParams.y = y - (int) ((itemHeight / 2) * dragScale);
 		//得到preview左上角相对于屏幕的坐标   
 		windowParams.x = x - win_view_x;
-		windowParams.y = y  - win_view_y; 
+		windowParams.y = y  - win_view_y;
 //		this.windowParams.x = (x - this.win_view_x + this.viewX);//位置的x值
 //		this.windowParams.y = (y - this.win_view_y + this.viewY);//位置的y值
 		//设置拖拽item的宽和高  
 		windowParams.width = (int) (dragScale * dragBitmap.getWidth());// 放大dragScale倍，可以设置拖动后的倍数
 		windowParams.height = (int) (dragScale * dragBitmap.getHeight());// 放大dragScale倍，可以设置拖动后的倍数
-		this.windowParams.flags = WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE                           
-                | WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE                           
-                | WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON                           
+		this.windowParams.flags = WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
+                | WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE
+                | WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
                 | WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN;
 		this.windowParams.format = PixelFormat.TRANSLUCENT;
 		this.windowParams.windowAnimations = 0;
@@ -279,24 +279,24 @@ public class DragGrid extends GridView {
 		int expandSpec = MeasureSpec.makeMeasureSpec(Integer.MAX_VALUE >> 2,MeasureSpec.AT_MOST);
 		super.onMeasure(widthMeasureSpec, expandSpec);
 	}
-	
+
 	/** 隐藏 放下 的ITEM*/
 	private void hideDropItem() {
 		((DragAdapter) getAdapter()).setShowDropItem(false);
 	}
-	
+
 	/** 获取移动动画 */
 	public Animation getMoveAnimation(float toXValue, float toYValue) {
 		TranslateAnimation mTranslateAnimation = new TranslateAnimation(
 				Animation.RELATIVE_TO_SELF, 0.0F,
-				Animation.RELATIVE_TO_SELF,toXValue, 
+				Animation.RELATIVE_TO_SELF,toXValue,
 				Animation.RELATIVE_TO_SELF, 0.0F,
 				Animation.RELATIVE_TO_SELF, toYValue);// 当前位置移动到指定位置
 		mTranslateAnimation.setFillAfter(true);// 设置一个动画效果执行完毕后，View对象保留在终止的位置。
 		mTranslateAnimation.setDuration(300L);
 		return mTranslateAnimation;
 	}
-	
+
 	/** 移动的时候触发*/
 	public void OnMove(int x, int y) {
 		// 拖动的VIEW下方的POSTION
@@ -322,14 +322,14 @@ public class DragGrid extends GridView {
 		    if(movecount == 0){
 		    	return;
 		    }
-		    
+
 		    int movecount_abs = Math.abs(movecount);
-		    
+
 			if (dPosition != dragPosition) {
 				//dragGroup设置为不可见
 				ViewGroup dragGroup = (ViewGroup) getChildAt(dragPosition);
 				dragGroup.setVisibility(View.INVISIBLE);
-				
+
 				float to_x = 1;// 当前下方positon
 				float to_y;// 当前下方右边positon
 				//x_vlaue移动的距离百分比（相对于自己长度的百分比）

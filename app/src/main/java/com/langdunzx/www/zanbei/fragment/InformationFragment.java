@@ -102,8 +102,8 @@ public class InformationFragment extends Fragment {
                 Intent intent_channel = new Intent(getActivity()
                         .getApplicationContext(), ChannelActivity.class);
                 startActivityForResult(intent_channel, CHANNELREQUEST);
-                /*getActivity().overridePendingTransition(R.anim.slide_in_right,
-                        R.anim.slide_out_left);*/
+                getActivity().overridePendingTransition(R.anim.slide_in_right,
+                        R.anim.slide_out_left);
             }
         });
         // top_head.setOnClickListener(new OnClickListener() {

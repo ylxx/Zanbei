@@ -39,7 +39,7 @@ public class DragAdapter extends BaseAdapter {
 		this.context = context;
 		this.channelList = channelList;
 	}
-	
+
 	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
@@ -60,7 +60,7 @@ public class DragAdapter extends BaseAdapter {
 		// TODO Auto-generated method stub
 		return position;
 	}
-	
+
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		View view = LayoutInflater.from(context).inflate(R.layout.channel_item, null);
@@ -111,7 +111,7 @@ public class DragAdapter extends BaseAdapter {
 		isListChanged = true;
 		notifyDataSetChanged();
 	}
-	
+
 	/** 获取频道列表 */
 	public List<ChannelItem> getChannnelLst() {
 		return channelList;
@@ -130,22 +130,22 @@ public class DragAdapter extends BaseAdapter {
 		isListChanged = true;
 		notifyDataSetChanged();
 	}
-	
+
 	/** 设置频道列表 */
 	public void setListDate(List<ChannelItem> list) {
 		channelList = list;
 	}
-	
+
 	/** 获取是否可见 */
 	public boolean isVisible() {
 		return isVisible;
 	}
-	
+
 	/** 排序是否发生改变 */
 	public boolean isListChanged() {
 		return isListChanged;
 	}
-	
+
 	/** 设置是否可见 */
 	public void setVisible(boolean visible) {
 		isVisible = visible;
