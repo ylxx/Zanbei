@@ -8,10 +8,10 @@ import android.util.Log;
 
 import com.langdunzx.www.zanbei.R;
 import com.langdunzx.www.zanbei.activity.BaseFragmentActivity;
-import com.langdunzx.www.zanbei.fragment.DiscoverPageFragment;
-import com.langdunzx.www.zanbei.fragment.FriendFragment;
-import com.langdunzx.www.zanbei.fragment.HomePageFragment;
-import com.langdunzx.www.zanbei.fragment.InformationFragment;
+import com.langdunzx.www.zanbei.fragment.main.DiscoverPageFragment;
+import com.langdunzx.www.zanbei.fragment.main.FriendFragment;
+import com.langdunzx.www.zanbei.fragment.main.HomePageFragment;
+import com.langdunzx.www.zanbei.fragment.main.InformationFragment;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.langdunzx.www.zanbei.fragment;
+package com.langdunzx.www.zanbei.fragment.main;
 
 import android.content.Intent;
 import android.support.annotation.Nullable;

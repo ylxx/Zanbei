@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.langdunzx.www.zanbei.fragment.FriendFragment">
+    tools:context=".fragment.main.FriendFragment">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

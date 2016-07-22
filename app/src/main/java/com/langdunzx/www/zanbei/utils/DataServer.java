@@ -2,6 +2,7 @@ package com.langdunzx.www.zanbei.utils;
 
 
 
+import com.langdunzx.www.zanbei.vo.FriendsEntity;
 import com.langdunzx.www.zanbei.vo.Status;
 
 import java.util.ArrayList;
@@ -28,6 +29,18 @@ public class DataServer {
             status.setUserAvatar("https://avatars1.githubusercontent.com/u/7698209?v=3&s=460");
             status.setText("BaseRecyclerViewAdpaterHelper https://www.recyclerview.org");
             list.add(status);
+        }
+        return list;
+    }
+
+    public static List<FriendsEntity> getFriendsData(int lenth) {
+        List<FriendsEntity> list = new ArrayList<>();
+        for (int i = 0; i < lenth; i++) {
+            FriendsEntity friendsEntity = new FriendsEntity();
+            friendsEntity.setHead("");
+            friendsEntity.setName("李四");
+            friendsEntity.setTag("1");
+            list.add(friendsEntity);
         }
         return list;
     }

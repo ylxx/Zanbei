@@ -2,7 +2,6 @@ package com.langdunzx.www.zanbei.activity.secondry;
 
 import android.os.Bundle;
 import android.os.Handler;
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.util.Log;
@@ -28,7 +27,7 @@ import com.langdunzx.www.zanbei.adapter.DragAdapter;
 import com.langdunzx.www.zanbei.adapter.OtherAdapter;
 import com.langdunzx.www.zanbei.application.LangDunApplication;
 import com.langdunzx.www.zanbei.bean.ChannelManage;
-import com.langdunzx.www.zanbei.fragment.InformationFragment;
+import com.langdunzx.www.zanbei.fragment.main.InformationFragment;
 import com.langdunzx.www.zanbei.newsUtils.ChannelItem;
 import com.langdunzx.www.zanbei.newsView.DragGrid;
 import com.langdunzx.www.zanbei.newsView.OtherGridView;
@@ -59,6 +58,7 @@ public class ChannelActivity extends BaseFragmentActivity implements OnItemClick
 		super.onCreate(savedInstanceState);
 		setContentViewWithActionBar(R.layout.activity_channel,"标签管理");
 
+
 		// 设置通知栏颜色
 		//initSystemBarTint();
 		initView();
@@ -82,6 +82,13 @@ public class ChannelActivity extends BaseFragmentActivity implements OnItemClick
 	private void initView() {
 		userGridView = (DragGrid) findViewById(R.id.userGridView);
 		otherGridView = (OtherGridView) findViewById(R.id.otherGridView);
+
+		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				onBackPressed();
+			}
+		});
 	}
 
 	@Override
