@@ -156,7 +156,12 @@ public class PostAsynTask extends AsyncTask<Command, Integer, Message> {
 		// 登录
 		if (Constants.LOGIN == command.commandID) {
 				return operation.executeLogin(command);
-				}
+		}
+
+		// 微信登录
+		if (Constants.WXLOGIN == command.commandID) {
+			return operation.executeLogin(command);
+		}
 		//首页数据加载
 		//if(Constants.HOME_DATA==command.commandID){
 			//	return operation.executeHomeData(command);

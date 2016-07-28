@@ -1,5 +1,6 @@
 package com.langdunzx.www.zanbei.activity.user;
 
+import android.app.Activity;
 import android.content.Intent;
 
 import android.os.AsyncTask;
@@ -26,9 +27,13 @@ import java.util.Map;
 
 import com.langdunzx.www.zanbei.R;
 import com.langdunzx.www.zanbei.activity.BaseFragmentActivity;
+import com.langdunzx.www.zanbei.config.Constants;
+import com.langdunzx.www.zanbei.controller.BaseHandler;
+import com.langdunzx.www.zanbei.controller.RequestCommant;
 import com.langdunzx.www.zanbei.utils.CheckUtil;
 import com.langdunzx.www.zanbei.utils.ClickUtil;
 import com.langdunzx.www.zanbei.utils.HttpUtils;
+import com.langdunzx.www.zanbei.utils.LogUtil;
 import com.langdunzx.www.zanbei.utils.MD5;
 import com.langdunzx.www.zanbei.utils.OkHttpUtils;
 import com.squareup.okhttp.FormEncodingBuilder;
@@ -49,7 +54,7 @@ public class LoginActivity extends BaseFragmentActivity {
     UMShareAPI mShareAPI;
     private EditText etUserName,etCode,etUserPaw;
     private LinearLayout llCode;
-    private Button btLogin,login_but,login_but1   ;
+    private Button btLogin,login_but,login_but1;
     private String userName, userPw, userCode;
     private ImageView img_wx,img_qq,img_sina;
     private String requestTag = "";
@@ -59,13 +64,39 @@ public class LoginActivity extends BaseFragmentActivity {
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             if(msg.what == 1){
-                String s = (String) msg.obj;
-                Toast.makeText(LoginActivity.this,s.toString(),Toast.LENGTH_SHORT).show();
+//                String s = (String) msg.obj;
+//                Toast.makeText(LoginActivity.this,s.toString(),Toast.LENGTH_SHORT).show();
             }else if(msg.what == 2){
-
+//                Map<String, String> map = (Map<String, String>) msg.obj;
+                Toast.makeText(LoginActivity.this,"WXdata：",Toast.LENGTH_SHORT).show();
             }
         }
     };
+
+    private class requetHandle extends BaseHandler {
+        public requetHandle(Activity activity) {
+            super(activity);
+            // TODO Auto-generated constructor stub
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            // TODO Auto-generated method stub
+            super.handleMessage(msg);
+
+            if (msg.what == Constants.LOGIN) {
+                System.out.println(command.success);
+
+                if (command.success) {
+                    Toast.makeText(LoginActivity.this, "登录成功",
+                            Toast.LENGTH_SHORT).show();
+
+                } else {
+                    showError((String) command.message);
+                }
+            }
+        }
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -111,7 +142,7 @@ public class LoginActivity extends BaseFragmentActivity {
                 case R.id.bt_login:
                     // 登陆请求.
                     confirmLogin();
-                    lOGON();
+//                    lOGON();
                     if (i == 0) {
                         i++;
                         llCode.setVisibility(View.VISIBLE);
@@ -123,7 +154,9 @@ public class LoginActivity extends BaseFragmentActivity {
                 case R.id.imageView_weixin:
                     // 授权微信
                     mShareAPI.doOauthVerify(LoginActivity.this, SHARE_MEDIA.WEIXIN,
-                            umAuthListener);
+                            umAuthListeners);
+//                    mShareAPI.getPlatformInfo(LoginActivity.this, SHARE_MEDIA.WEIXIN,
+//                            umAuthListener);
                     break;
                 case R.id.imageView_qq:
                     // 授权腾讯
@@ -136,10 +169,12 @@ public class LoginActivity extends BaseFragmentActivity {
                             umAuthListener);
                     break;
                 case R.id.login_but:
-                    new AsnyckLogin().execute();
+//                    new AsnyckLogin().execute();
+                    mShareAPI.getPlatformInfo(LoginActivity.this, SHARE_MEDIA.WEIXIN,
+                            umAuthListener);
                     break;
                 case R.id.login_but1:
-                    lOGON();
+//                    lOGON();
                     break;
                 default:
                     break;
@@ -148,98 +183,53 @@ public class LoginActivity extends BaseFragmentActivity {
 
     };
 
-    /**
-     * 封装好的okHttp
-     */
-    private void lOGON(){
-        String url = String.format("http://langdunedu.com/api/");
-        Date date = new Date();
-        DateFormat format = new SimpleDateFormat("yyyyMMdd");
-        String time = format.format(date);
-        String uid = etUserName.getText().toString();
-        String tokenOne = time + uid;
-        String tokenTwo = MD5.MD5(tokenOne);
-        String token = MD5.MD5(tokenTwo);
-        List<OkHttpUtils.Param> list = new ArrayList<OkHttpUtils.Param>();
-        list.add(new OkHttpUtils.Param("action","reglogin"));
-        list.add(new OkHttpUtils.Param("token",token));
-        list.add(new OkHttpUtils.Param("uid",uid));
-        list.add(new OkHttpUtils.Param("password",""));
-        list.add(new OkHttpUtils.Param("pw",""+etCode.getText().toString()));
-        OkHttpUtils.post(url, new OkHttpUtils.ResultCallback() {
-            @Override
-            public void onSuccess(Object response) {
-                if(response!=null){
-                    //成功干的事情
-                    handler.obtainMessage(1,response).sendToTarget();
-                }
-            }
+//    /**
+//     * 封装好的okHttp
+//     */
+//    private void lOGON(){
+//        String url = String.format("http://api.anydo.com/index.php/Home/Api/reglogin/uid/13718141869/password/111111/pw/");
+//        Date date = new Date();
+//        DateFormat format = new SimpleDateFormat("yyyyMMdd");
+//        String time = format.format(date);
+//        String uid = etUserName.getText().toString();
+//        String tokenOne = time + uid;
+//        String tokenTwo = MD5.MD5(tokenOne);
+//        String token = MD5.MD5(tokenTwo);
+//        List<OkHttpUtils.Param> list = new ArrayList<OkHttpUtils.Param>();
+////        list.add(new OkHttpUtils.Param("action","reglogin"));
+////        list.add(new OkHttpUtils.Param("token",token));
+////        list.add(new OkHttpUtils.Param("uid",uid));
+////        list.add(new OkHttpUtils.Param("password",""));
+////        list.add(new OkHttpUtils.Param("pw",""+etCode.getText().toString()));
+//        OkHttpUtils.post(url, new OkHttpUtils.ResultCallback() {
+//            @Override
+//            public void onSuccess(Object response) {
+//                if(response!=null){
+//                    //成功干的事情
+//                    handler.obtainMessage(1,response).sendToTarget();
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Exception e) {
+//                //失败错误信息
+//                LogUtil.e("okerr",""+e.toString());
+//                handler.obtainMessage(2,e.toString()).sendToTarget();
+//            }
+//        },list);
+//    }
 
-            @Override
-            public void onFailure(Exception e) {
-                //失败错误信息
-                handler.obtainMessage(2,e.toString()).sendToTarget();
-            }
-        },list);
-    }
-
-    /***
-     * 最原生的okHttp-Post请求
-     */
-    private class AsnyckLogin extends AsyncTask<String, Void, String> {
-        HttpUtils http = new HttpUtils();
-        OkHttpClient client = new OkHttpClient();
-        String json = null;
-
-        @Override
-        protected String doInBackground(String... params) {
-            Date date = new Date();
-            DateFormat format = new SimpleDateFormat("yyyyMMdd");
-            String time = format.format(date);
-            String uid = "13810250440";
-            String tokenOne = time + uid;
-            String tokenTwo = MD5.MD5(tokenOne);
-            String token = MD5.MD5(tokenTwo);
-            String url = String.format("http://langdunedu.com/api/");
-            RequestBody formBody = new FormEncodingBuilder()  //post方式
-                    .add("action", "reglogin")
-                    .add("token", token)
-                    .add("uid", "13810250440")
-                    .add("password", "")
-                    .add("pw", "")
-                    .build();
-            Request request = new Request.Builder().url(url).post(formBody).build(); //请求服务器
-            try {
-                Response response = client.newCall(request).execute();//获取到返回值
-                if (response.isSuccessful()) {
-                    json = response.body().string();
-                } else {
-                    throw new IOException("Unexpected code " + response);
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            if (json != null) {
-                handler.obtainMessage(1,json).sendToTarget();
-            } else {
-
-            }
-            return null;
-        }
-    }
 
     /***
      * 登录
      */
     private void confirmLogin() {
-        userName = etUserName.getText().toString().trim();
-        userPw = etUserPaw.getText().toString().trim();
         // 检验
         if (etUserName.length() == 0) {
             showError("请输入手机号");
             return;
         }
-        if (!CheckUtil.isPhoneNum(userName)) {
+        if (!CheckUtil.isPhoneNum(etUserName.getText().toString())) {
             showError("请输入正确的手机号码");
             return;
         }
@@ -248,19 +238,66 @@ public class LoginActivity extends BaseFragmentActivity {
             return;
         }
 
-        //HashMap<String, String> hashmap = new HashMap<String, String>();
-        //hashmap.put("name", etUserName.getText().toString());
-        //hashmap.put("password", etUserName.getText().toString());
-//        new RequestCommant()
-//                .requestlogin(new requetHandle(this), this, hashmap);
+        HashMap<String, String> hashmap = new HashMap<String, String>();
+        hashmap.put("uid", etUserName.getText().toString());
+        hashmap.put("password", etUserPaw.getText().toString());
+        hashmap.put("pw", etCode.getText().toString());
+        new RequestCommant()
+                .requestlogin(new requetHandle(this), this, hashmap);
     }
-
-
+    private void WXloading(String openid,String nickname,String headimgurl){
+        HashMap<String, String> hashmap = new HashMap<String, String>();
+        hashmap.put("usid", openid);
+        hashmap.put("username", nickname);
+        hashmap.put("iconURL",headimgurl);
+        new RequestCommant()
+                .requestwxlogin(new requetHandle(this), this, hashmap);
+    }
     private UMAuthListener umAuthListener = new UMAuthListener() {
         @Override
         public void onComplete(SHARE_MEDIA platform, int action, Map<String, String> data) {
-            //个人信息在此拿 map-data
-            Toast.makeText( getApplicationContext(), "授权成功"+data.toString(), Toast.LENGTH_SHORT).show();
+
+        }
+
+        @Override
+        public void onError(SHARE_MEDIA platform, int action, Throwable t) {
+            Toast.makeText( getApplicationContext(), "授权失败", Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void onCancel(SHARE_MEDIA platform, int action) {
+            Toast.makeText( getApplicationContext(), "授权取消", Toast.LENGTH_SHORT).show();
+        }
+    };
+
+    private UMAuthListener umAuthListeners = new UMAuthListener() {
+        @Override
+        public void onComplete(SHARE_MEDIA platform, int action, Map<String, String> data) {
+            Toast.makeText( getApplicationContext(), "授权成功", Toast.LENGTH_SHORT).show();
+            mShareAPI.getPlatformInfo(LoginActivity.this, SHARE_MEDIA.WEIXIN,
+                    new UMAuthListener() {
+                        @Override
+                        public void onComplete(SHARE_MEDIA share_media, int i, Map<String, String> map) {
+                            if(map!=null){
+                                String openid = map.get("openid").toString();
+                                String nickname = map.get("nickname").toString();
+                                String headimgurl = map.get("headimgurl").toString();
+                                WXloading(openid,nickname,headimgurl);
+                            }else{
+                                Toast.makeText(getApplicationContext(),"没有授权", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                        @Override
+                        public void onError(SHARE_MEDIA share_media, int i, Throwable throwable) {
+
+                        }
+
+                        @Override
+                        public void onCancel(SHARE_MEDIA share_media, int i) {
+
+                        }
+                    });
         }
 
         @Override

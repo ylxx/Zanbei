@@ -15,8 +15,20 @@ public class RequestCommant {
 			HashMap<String, String> paramHashMap) {
 		Command command = new Command(Constants.LOGIN, handler);
 		command.param = paramHashMap;
-		command.method = "api";
+		command.method = "reglogin";
 		command.waitingMsg = "加载中，请稍候..."; 
+		command.showDialog = true;
+		command.context = context;
+		PostAsynTask mPostAsynTask = new PostAsynTask(context, command);
+		mPostAsynTask.execute();
+	}
+	//6.1 登录验证接口
+	public void requestwxlogin(BaseHandler handler, Context context,
+							 HashMap<String, String> paramHashMap) {
+		Command command = new Command(Constants.WXLOGIN, handler);
+		command.param = paramHashMap;
+		command.method = "weixinLogin";
+		command.waitingMsg = "加载中，请稍候...";
 		command.showDialog = true;
 		command.context = context;
 		PostAsynTask mPostAsynTask = new PostAsynTask(context, command);

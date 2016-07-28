@@ -32,8 +32,8 @@ import java.util.Set;
 import java.util.UUID;
 
 public class CallServer {
-	private String INFO = "http://www.langdunzx.com/";
-	private String HTTP_URL = "http://www.langdunzx.com/";// 外网
+	private String HTTP_URL = "http://api.anydo.com/index.php/Home/Api/";// 外网
+//	private String HTTP_URL = "http://www.langdunzx.com/";// 外网
 	private String HTTP_URL_HOME_DATA = "http://www.langdunzx.com/";// 首页轮播图
 //	private String HTTP_URL_HOME_DATA = "http://un.ehgo.com/u/255/";// 首页轮播图
 	private static CallServer _callServer;
@@ -147,7 +147,6 @@ public class CallServer {
 		Logge.LogI("uri is : " + uri);
 		HttpPost post = new HttpPost(uri);
 		HttpResponse response;
-
 		try {
 			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 			Set<String> paramKeySet = reqParams.keySet();
@@ -158,9 +157,7 @@ public class CallServer {
 				Logge.LogI("param is : " + key + " = " + reqParams.get(key));
 				nameValuePairs.add(new BasicNameValuePair(key, reqParams
 						.get(key)));
-
 			}
-
 			post.setEntity(new UrlEncodedFormEntity(nameValuePairs, "utf-8"));
 			Logge.LogI(post.getURI().toString());
 			/**
@@ -170,69 +167,13 @@ public class CallServer {
 
 			DefaultHttpClient httpClient = (DefaultHttpClient) getHttpClient();
 			response = httpClient.execute(post);
-
+			Logge.LogI("postUrl | " +post.getURI().toString());
 			if (response.getStatusLine().getStatusCode() != 404) {
 				result = EntityUtils.toString(response.getEntity(), "utf-8");
 			} else {
 				Logge.LogI("" + response.getStatusLine().getStatusCode());
 			}
 		} catch (IOException e) { 
-			e.printStackTrace();
-			Logge.LogI("CallServer | " + e.getMessage());
-			return null;
-		} finally {
-			post.abort();
-		}
-		Logge.LogI("请求服务器返回数据 : " + result);
-		return result;
-	}
-	/**
-	 * HTTP POST请求(268)
-	 *
-	 * @param method
-	 * @param reqParams
-	 * @param context
-	 * @return
-	 */
-	private String goHttpPostssssss(String method, HashMap<String, String> reqParams,
-							  Context context) {
-		Logge.LogI("url is : " + INFO);
-		Logge.LogI("method is : " + method);
-		String result = null;
-		String uri = INFO + method;
-		Logge.LogI("uri is : " + uri);
-		HttpPost post = new HttpPost(uri);
-		HttpResponse response;
-
-		try {
-			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-			Set<String> paramKeySet = reqParams.keySet();
-			Iterator<String> iterator = paramKeySet.iterator();
-			while (iterator.hasNext()) {
-
-				String key = iterator.next();
-				Logge.LogI("param is : " + key + " = " + reqParams.get(key));
-				nameValuePairs.add(new BasicNameValuePair(key, reqParams
-						.get(key)));
-
-			}
-
-			post.setEntity(new UrlEncodedFormEntity(nameValuePairs, "utf-8"));
-			Logge.LogI(post.getURI().toString());
-			/**
-			 * 创建Http Header
-			 */
-			// createPostHeader(context, post);
-
-			DefaultHttpClient httpClient = (DefaultHttpClient) getHttpClient();
-			response = httpClient.execute(post);
-
-			if (response.getStatusLine().getStatusCode() != 404) {
-				result = EntityUtils.toString(response.getEntity(), "utf-8");
-			} else {
-				Logge.LogI("" + response.getStatusLine().getStatusCode());
-			}
-		} catch (IOException e) {
 			e.printStackTrace();
 			Logge.LogI("CallServer | " + e.getMessage());
 			return null;
@@ -376,8 +317,7 @@ public class CallServer {
 	}
 	public String callServers(String method, HashMap<String, String> reqParams,
 							 Context context) {
-//		String responseString = goHttpPost(method, reqParams, context);
-		String responseString = goHttpPostssssss(method, reqParams, context);
+		String responseString = goHttpPost(method, reqParams, context);
 		return responseString;
 	}
 	/**

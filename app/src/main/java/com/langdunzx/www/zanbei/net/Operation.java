@@ -51,13 +51,11 @@ public class Operation {
 				hashMap, cmd.context);
 		Message msg = Message.obtain();
 		msg.what = cmd.commandID;
-//		UserLoginBodyVo vo = JsonVoParser.getInstance().getUserLoginBodyVo(
-//				jsonString);
 		BaseVo baseVo = JsonVoParser.getInstance().getBasevo(jsonString);
 		if ((null != jsonString) && !"".equals(jsonString) && baseVo != null) {
 			if (baseVo.getSuccess()) {
 				cmd.success = true;
-//				cmd.resData = vo;
+				cmd.resData = baseVo;
 			} else {
 				cmd.message = baseVo.getMessage();
 				cmd.success = false;

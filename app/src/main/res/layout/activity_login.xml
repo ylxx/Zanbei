@@ -40,7 +40,7 @@
                 android:layout_marginLeft="25dp"
                 android:background="@null"
                 android:hint="请输入您注册的手机号"
-                android:text="13398627830"
+                android:text="13810250440"
                 android:singleLine="true"
                 android:textColorHint="@color/text_color"
                 android:textSize="12sp" />
@@ -68,7 +68,7 @@
                 android:layout_marginLeft="12dp"
                 android:background="@null"
                 android:hint="请输入您的登录密码"
-                android:text="123456"
+                android:text="111111"
                 android:singleLine="true"
                 android:textColorHint="@color/text_color"
                 android:textSize="12sp" />
