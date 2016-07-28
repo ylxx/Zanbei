@@ -36,6 +36,12 @@
     <string name="activity_type_five">美食家 遇见味蕾的舞动</string>
     <string name="title_activity_persional">PersionalActivity</string>
 
+    <!-- 我的信息 -->
+    <string name="myinfo_photo">头像</string>
+    <string name="myinfo_nickname">昵称</string>
+    <string name="set_nickname">编辑昵称</string>
+    <string name="save">保存</string>
+
     <!-- homePageFragment -->
 
     <string name="leave">确定离开</string>

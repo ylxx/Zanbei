@@ -160,8 +160,8 @@ public class ViewPagerIndictor extends LinearLayout {
 		mPath = new Path();
 		mPath.moveTo(mTranslationX, 0);
 		mPath.lineTo(mTriangleWidth, 0);
-		mPath.lineTo(mTriangleWidth,-mTriangleWidth/18);
-		mPath.lineTo(mTranslationX,-mTriangleWidth/18);
+		mPath.lineTo(mTriangleWidth,-mTriangleWidth/36);
+		mPath.lineTo(mTranslationX,-mTriangleWidth/36);
 		mPath.close();
 	}
 

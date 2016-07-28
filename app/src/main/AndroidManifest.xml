@@ -5,7 +5,6 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-
     <uses-permission android:name="android.permission.VIBRATE" />
     <!-- 友盟分享-登陆权限 -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -45,7 +44,7 @@
         <!-- 友盟appid -->
         <meta-data
             android:name="UMENG_APPKEY"
-            android:value="4eaee02c527015373b000003"></meta-data>
+            android:value="4eaee02c527015373b000003" />
 
         <activity
             android:name="com.umeng.socialize.editorpage.ShareActivity"
@@ -71,11 +70,11 @@
             android:name="com.sina.weibo.sdk.component.WeiboSdkBrowser"
             android:configChanges="keyboardHidden|orientation"
             android:exported="false"
-            android:windowSoftInputMode="adjustResize"></activity>
+            android:windowSoftInputMode="adjustResize" />
 
         <service
             android:name="com.sina.weibo.sdk.net.DownloadService"
-            android:exported="false"></service>
+            android:exported="false" />
 
         <activity
             android:name="com.tencent.tauth.AuthActivity"
@@ -95,7 +94,8 @@
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <!--  -->
-        <activity android:name=".activity.user.MyOwnActivity"></activity>
+        <activity android:name=".activity.user.MyOwnActivity" />
+        <activity android:name=".activity.user.MyInforActivity"></activity>
     </application>
 
 </manifest>

@@ -7,6 +7,7 @@ import com.langdunzx.www.zanbei.R;
 import com.langdunzx.www.zanbei.bean.BaseVo;
 import com.langdunzx.www.zanbei.config.Command;
 import com.langdunzx.www.zanbei.date.JsonVoParser;
+import com.langdunzx.www.zanbei.vo.HomePageBodyVo;
 
 import java.util.HashMap;
 
@@ -81,6 +82,7 @@ public class Operation {
 	 * 首页数据加载
 	 * @param cmd
 	 * @return
+	 * */
 
 	@SuppressWarnings("unchecked")
 	public Message executeHomeData(Command cmd) {
@@ -113,7 +115,7 @@ public class Operation {
 		return msg;
 
 	}
-	 */
+
 	/**
 	 *
 	 * 助学宝页数据加载

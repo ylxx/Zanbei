@@ -1,6 +1,7 @@
 package com.langdunzx.www.zanbei.activity.user;
 
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.os.Build;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -27,6 +28,7 @@ import com.jaeger.library.StatusBarUtil;
 import com.langdunzx.www.zanbei.R;
 import com.langdunzx.www.zanbei.activity.BaseFragmentActivity;
 import com.langdunzx.www.zanbei.adapter.ViewPagerAdapter;
+import com.langdunzx.www.zanbei.utils.ClickUtil;
 
 import jp.wasabeef.glide.transformations.BlurTransformation;
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
@@ -39,6 +41,7 @@ public class MyOwnActivity extends BaseFragmentActivity {
     private CollapsingToolbarLayout mCollapsingToolbarLayout;
     private CoordinatorLayout root_layout;
     private TextView tv;
+    private ImageView head_iv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +58,7 @@ public class MyOwnActivity extends BaseFragmentActivity {
         });*/
 
         initView();
+        ClickUtil.setClickListener(this,head_iv);
 
     }
 
@@ -80,7 +84,7 @@ public class MyOwnActivity extends BaseFragmentActivity {
             @Override
             public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
                 if(verticalOffset <= -head_layout.getHeight() / 2){
-                    mCollapsingToolbarLayout.setTitle("个人资料");
+                    mCollapsingToolbarLayout.setTitle("个人中心");
                 }else{
                     mCollapsingToolbarLayout.setTitle("");
                 }
@@ -99,7 +103,7 @@ public class MyOwnActivity extends BaseFragmentActivity {
         /**
          * 设置头像
          */
-        ImageView head_iv = (ImageView) findViewById(R.id.head_iv);
+        head_iv = (ImageView) findViewById(R.id.head_iv);
         Glide.with(this).load(R.mipmap.bg).bitmapTransform(new RoundedCornersTransformation(this,
                 90, 0)).into(head_iv);
     }
@@ -153,5 +157,16 @@ public class MyOwnActivity extends BaseFragmentActivity {
             Toast.makeText(MyOwnActivity.this, msg, Toast.LENGTH_SHORT).show();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onClick(View v) {
+        super.onClick(v);
+        switch (v.getId()){
+            case R.id.head_iv:
+                startActivity(new Intent(MyOwnActivity.this,MyInforActivity.class));
+                break;
+        }
+
     }
 }
