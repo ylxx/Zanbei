@@ -77,7 +77,7 @@ public class NewsInformationFragment extends BaseBackFragment implements BaseQui
     }
 
     private void addHeadView() {
-        View headView = getActivity().getLayoutInflater().inflate(R.layout.news_head_view, (ViewGroup) mRecyclerView.getParent(), false);
+        View headView = getActivity().getLayoutInflater().inflate(R.layout.head_view_news, (ViewGroup) mRecyclerView.getParent(), false);
         ((TextView)headView.findViewById(R.id.tv)).setText("click use custom loading view");
         final View customLoading = getActivity().getLayoutInflater().inflate(R.layout.custom_loading, (ViewGroup) mRecyclerView.getParent(), false);
         headView.setOnClickListener(new View.OnClickListener() {

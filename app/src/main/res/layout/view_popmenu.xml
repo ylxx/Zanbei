@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/tv_pic_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:gravity="center"
+        android:padding="8dp"
+        android:text="拍照"
+        android:textColor="@color/blue"
+        android:textSize="20sp" />
+
+    <View
+        android:id="@+id/line_pop_menu_top"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/tv_pic_1"
+        android:background="@color/gray_background" />
+
+    <TextView
+        android:id="@+id/tv_pic_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:gravity="center"
+        android:padding="8dp"
+        android:text="从相册选择"
+        android:textColor="@color/blue"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/tv_pic_3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dip"
+        android:background="#ffffff"
+        android:gravity="center"
+        android:padding="8dp"
+        android:text="取消"
+        android:textColor="@color/blue"
+        android:textSize="20sp" />
+
+</LinearLayout>

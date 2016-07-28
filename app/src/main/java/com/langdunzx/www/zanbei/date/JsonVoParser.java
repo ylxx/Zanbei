@@ -2,6 +2,7 @@ package com.langdunzx.www.zanbei.date;
 
 
 import com.langdunzx.www.zanbei.bean.BaseVo;
+import com.langdunzx.www.zanbei.vo.HomePageBodyVo;
 
 public class JsonVoParser {
 	private static JsonVoParser _jsonVoParser;
@@ -46,21 +47,21 @@ public class JsonVoParser {
 		}
 		*/
 
-		/**首页加载
+		//首页加载
 		public HomePageBodyVo gethoHomePageBodyVo(String json){
 			return jsonBinder.fromJson(json, HomePageBodyVo.class);
 		}
-		 **/
-		/**首页bottom加载
+
+		/*//首页bottom加载
 		public HomePageBottomEntityVo getHomePageBottomEntityVo(String json){
 			return jsonBinder.fromJson(json, HomePageBottomEntityVo.class);
 		}
-		 **/
-		/**资讯信息加载
+
+		//资讯信息加载
 		public infor getInformationEntityVo(String json){
 			return jsonBinder.fromJson(json, infor.class);
-		}
-		 **/
+		}*/
+
 	//	//考证页加载
 	//	public ExamPageEntityVo getExamPageEntityVo(String json){
 	//		return jsonBinder.fromJson(json, ExamPageEntityVo.class);
