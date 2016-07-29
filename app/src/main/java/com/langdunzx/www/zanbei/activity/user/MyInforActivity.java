@@ -7,6 +7,8 @@ import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.design.widget.AppBarLayout;
+import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
@@ -66,6 +68,22 @@ public class MyInforActivity extends BaseFragmentActivity implements ImageLoadin
     }
 
     private void initView() {
+//        AppBarLayout appBarLayout = (AppBarLayout) findViewById(R.id.app_bar_layout);
+//        Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
+//        setSupportActionBar(mToolbar);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        /*appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
+            @Override
+            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
+                if(verticalOffset <= -head_layout.getHeight() / 2){
+                    mCollapsingToolbarLayo*//**//*ut.setTitle("个人中心");
+                }else{
+                    mCollapsingToolbarLayout.setTitle("");
+                }
+            }
+        });*/
+
         photo = (ImageView) findViewById(R.id.user_photo_iv);
         llHeadView = (LinearLayout) findViewById(R.id.ll_head_iv);
         llNickName = (LinearLayout) findViewById(R.id.ll_nick_name);

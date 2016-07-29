@@ -1,5 +1,6 @@
 package com.langdunzx.www.zanbei.fragment.Information;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -14,6 +15,7 @@ import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.langdunzx.www.zanbei.R;
+import com.langdunzx.www.zanbei.activity.secondry.NewsInforActivity;
 import com.langdunzx.www.zanbei.adapter.NewsRecycleViewAdapter;
 import com.langdunzx.www.zanbei.fragment.BaseBackFragment;
 import com.langdunzx.www.zanbei.utils.DataServer;
@@ -71,7 +73,9 @@ public class NewsInformationFragment extends BaseBackFragment implements BaseQui
         mAdapter.setOnRecyclerViewItemClickListener(new BaseQuickAdapter.OnRecyclerViewItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                Toast.makeText(getActivity(), Integer.toString(position), Toast.LENGTH_LONG).show();
+//                Toast.makeText(getActivity(), Integer.toString(position), Toast.LENGTH_LONG).show();
+                startActivity(new Intent(getActivity(), NewsInforActivity.class));
+
             }
         });
     }
