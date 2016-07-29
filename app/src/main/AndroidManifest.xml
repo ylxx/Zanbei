@@ -95,7 +95,11 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <!--  -->
         <activity android:name=".activity.user.MyOwnActivity" />
-        <activity android:name=".activity.user.MyInforActivity"></activity>
+        <activity android:name=".activity.user.MyInforActivity" />
+        <activity
+            android:name=".activity.secondry.NewsInforActivity"
+            android:label="@string/title_activity_news_infor"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

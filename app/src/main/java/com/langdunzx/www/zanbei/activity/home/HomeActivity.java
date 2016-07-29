@@ -1,11 +1,13 @@
 package com.langdunzx.www.zanbei.activity.home;
 
+import android.graphics.Color;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.util.Log;
 
+import com.jaeger.library.StatusBarUtil;
 import com.langdunzx.www.zanbei.R;
 import com.langdunzx.www.zanbei.activity.BaseFragmentActivity;
 import com.langdunzx.www.zanbei.fragment.main.DiscoverPageFragment;
@@ -32,6 +34,10 @@ public class HomeActivity extends BaseFragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+//        StatusBarUtil.setTranslucent(HomeActivity.this, StatusBarUtil.DEFAULT_STATUS_BAR_ALPHA);
+//        StatusBarUtil.createStatusBarView(HomeActivity.this, Color.BLUE);
+//        StatusBarUtil.setColor(HomeActivity.this, Color.BLUE,StatusBarUtil.DEFAULT_STATUS_BAR_ALPHA);
+//        StatusBarUtil.createStatusBarView(HomeActivity.this,R.color.red);
         setupActionBar();
         initFragment();
         BottomTabTest();

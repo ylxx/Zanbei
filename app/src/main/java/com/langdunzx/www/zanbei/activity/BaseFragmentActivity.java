@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -16,6 +17,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 
+import com.jaeger.library.StatusBarUtil;
 import com.langdunzx.www.zanbei.R;
 import com.langdunzx.www.zanbei.application.LangDunApplication;
 import com.langdunzx.www.zanbei.config.Constants;
@@ -63,9 +65,9 @@ public class BaseFragmentActivity extends AppCompatActivity implements
         inflater.inflate(layoutResID, contentV);
         setContentView(contentV);
 
-
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle(title);
+
         toolbar.setNavigationIcon(R.mipmap.ic_arrow_back_white);
 
         toolbar.setNavigationOnClickListener(new OnClickListener() {
@@ -74,6 +76,8 @@ public class BaseFragmentActivity extends AppCompatActivity implements
                 BaseFragmentActivity.this.finish();
             }
         });
+
+//        StatusBarUtil.setTranslucent(BaseFragmentActivity.this, StatusBarUtil.DEFAULT_STATUS_BAR_ALPHA);
 
 
 //        setSupportActionBar(toolbar);
