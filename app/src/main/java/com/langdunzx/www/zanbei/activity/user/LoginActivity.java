@@ -182,7 +182,7 @@ public class LoginActivity extends BaseFragmentActivity {
         }
 
     };
-
+//
 //    /**
 //     * 封装好的okHttp
 //     */
@@ -217,6 +217,18 @@ public class LoginActivity extends BaseFragmentActivity {
 //                handler.obtainMessage(2,e.toString()).sendToTarget();
 //            }
 //        },list);
+//
+//        OkHttpUtils.get(url, new OkHttpUtils.ResultCallback() {
+//            @Override
+//            public void onSuccess(Object response) {
+//                //成功响应
+//            }
+//
+//            @Override
+//            public void onFailure(Exception e) {
+//                //失败响应
+//            }
+//        });
 //    }
 
 

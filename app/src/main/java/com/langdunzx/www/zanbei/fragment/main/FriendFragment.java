@@ -1,6 +1,8 @@
 package com.langdunzx.www.zanbei.fragment.main;
 
+import android.app.Activity;
 import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.os.Bundle;
@@ -14,8 +16,13 @@ import android.widget.Toast;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.langdunzx.www.zanbei.R;
 import com.langdunzx.www.zanbei.adapter.FriendsAdapter;
+import com.langdunzx.www.zanbei.config.Constants;
+import com.langdunzx.www.zanbei.controller.BaseHandler;
+import com.langdunzx.www.zanbei.controller.RequestCommant;
 import com.langdunzx.www.zanbei.fragment.BaseBackFragment;
 import com.langdunzx.www.zanbei.utils.DataServer;
+
+import java.util.HashMap;
 
 public class FriendFragment extends BaseBackFragment implements BaseQuickAdapter.RequestLoadMoreListener,SwipeRefreshLayout.OnRefreshListener{
 
@@ -36,6 +43,7 @@ public class FriendFragment extends BaseBackFragment implements BaseQuickAdapter
         initAdapter();
         addHeadView();
         mRecyclerView.setAdapter(mAdapter);
+        getfriends();
         return view;
     }
 
@@ -123,5 +131,32 @@ public class FriendFragment extends BaseBackFragment implements BaseQuickAdapter
 
 
         });
+    }
+    private void getfriends(){
+        HashMap<String, String> hashmap = new HashMap<String, String>();
+        hashmap.put("classid","11");
+        hashmap.put("uid","128");
+        new RequestCommant()
+                .requestInformationdata(new requetHandle(getActivity()), getActivity(), hashmap);
+    }
+    private class requetHandle extends BaseHandler {
+        public requetHandle(Activity activity) {
+            super(activity);
+            // TODO Auto-generated constructor stub
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            // TODO Auto-generated method stub
+            super.handleMessage(msg);
+
+            if (msg.what == Constants.LOGIN) {
+                System.out.println(command.success);
+                if (command.success) {
+                    Toast.makeText(getContext(), "返回成功",
+                            Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
     }
 }

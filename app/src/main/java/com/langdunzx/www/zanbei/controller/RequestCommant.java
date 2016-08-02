@@ -34,11 +34,23 @@ public class RequestCommant {
 		PostAsynTask mPostAsynTask = new PostAsynTask(context, command);
 		mPostAsynTask.execute();
 	}
+	//6.2 资讯验证接口
+	public void requestInformationdata(BaseHandler handler, Context context,
+							   HashMap<String, String> paramHashMap) {
+		Command command = new Command(Constants.INFORMATION, handler);
+		command.param = paramHashMap;
+		command.method = "newslist";
+		command.waitingMsg = "加载中，请稍候...";
+		command.showDialog = true;
+		command.context = context;
+		PostAsynTask mPostAsynTask = new PostAsynTask(context, command);
+		mPostAsynTask.execute();
+	}
 	//6.3 首页数据接口
 	public void requestHomeData(BaseHandler handler,Context context,HashMap<String, String> paramHashMap){
 		Command command = new Command(Constants.HOME_DATA, handler); 
 		command.param = paramHashMap;
-		command.method = "api";  
+		command.method = "api";
 		command.waitingMsg = "加载中，请稍候...";
 		command.showDialog = true;
 		command.context = context;

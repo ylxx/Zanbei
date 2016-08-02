@@ -1,6 +1,8 @@
 package com.langdunzx.www.zanbei.fragment.main;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -21,6 +23,9 @@ import com.langdunzx.www.zanbei.activity.secondry.ChannelActivity;
 import com.langdunzx.www.zanbei.adapter.NewsFragmentPagerAdapter;
 import com.langdunzx.www.zanbei.application.LangDunApplication;
 import com.langdunzx.www.zanbei.bean.ChannelManage;
+import com.langdunzx.www.zanbei.config.Constants;
+import com.langdunzx.www.zanbei.controller.BaseHandler;
+import com.langdunzx.www.zanbei.controller.RequestCommant;
 import com.langdunzx.www.zanbei.fragment.Information.NewsFragment;
 import com.langdunzx.www.zanbei.fragment.Information.NewsHotFragment;
 import com.langdunzx.www.zanbei.fragment.Information.NewsInformationFragment;
@@ -29,6 +34,7 @@ import com.langdunzx.www.zanbei.utils.BaseTools;
 import com.langdunzx.www.zanbei.view.ColumnHorizontalScrollView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 
 public class InformationFragment extends Fragment {
@@ -131,6 +137,7 @@ public class InformationFragment extends Fragment {
         // }
         // });
         setChangelView();
+        getinfo();
     }
     /**
      * 当栏目项发生变化时候调用
@@ -287,5 +294,32 @@ public class InformationFragment extends Fragment {
                 break;
         }
         super.onActivityResult(requestCode, resultCode, data);
+    }
+    private void getinfo(){
+        HashMap<String, String> hashmap = new HashMap<String, String>();
+        hashmap.put("classid","11");
+        hashmap.put("uid","128");
+        new RequestCommant()
+                .requestInformationdata(new requetHandle(getActivity()), getActivity(), hashmap);
+    }
+    private class requetHandle extends BaseHandler {
+        public requetHandle(Activity activity) {
+            super(activity);
+            // TODO Auto-generated constructor stub
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            // TODO Auto-generated method stub
+            super.handleMessage(msg);
+
+            if (msg.what == Constants.LOGIN) {
+                System.out.println(command.success);
+                if (command.success) {
+                    Toast.makeText(getContext(), "返回成功",
+                            Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
     }
 }

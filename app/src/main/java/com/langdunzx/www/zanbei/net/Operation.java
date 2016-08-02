@@ -1126,24 +1126,24 @@ public class Operation {
 		return msg;
 
 	}
-	/**资讯新闻列表
+//	资讯新闻列表
 	public static Message executeInformation(Command command) {
 		HashMap<String, String> hashMap = (HashMap<String, String>) command.param;
-		String jsonString = CallServer.getInstance().callServers(command.method,
+		String jsonString = CallServer.getInstance().callServer(command.method,
 				hashMap, command.context);
 		Message msg = Message.obtain();
 		msg.what = command.commandID;
-		infor infor = JsonVoParser.getInstance().getInformationEntityVo(jsonString);
-		if ((null != jsonString) && !"".equals(jsonString) && infor != null) {
-//			if (infor.isSuccess()) {
+		BaseVo baseVo = JsonVoParser.getInstance().getBasevo(jsonString);
+		if ((null != jsonString) && !"".equals(jsonString) && baseVo != null) {
+			if (baseVo.getSuccess()) {
 				command.success = true;
-				command.resData = infor;
-//			} else {
-//				command.message = infor.getMessage();
-//				command.success = false;
-//			}
+//				command.resData = infor;
+			} else {
+				command.message = baseVo.getMessage();
+				command.success = false;
+			}
 		} else {
-			if (infor != null) {
+			if (baseVo != null) {
 //				command.message = infor.getMessage();
 				command.success = false;
 			} else {
@@ -1155,7 +1155,7 @@ public class Operation {
 		msg.obj = command;
 		return msg;
 	}
-	 */
+
 	/*个人头像修改
 	@SuppressWarnings("unchecked")
 	public Message executeSearch(Command cmd) {
