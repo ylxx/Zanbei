@@ -7,6 +7,8 @@ import com.langdunzx.www.zanbei.R;
 import com.langdunzx.www.zanbei.bean.BaseVo;
 import com.langdunzx.www.zanbei.config.Command;
 import com.langdunzx.www.zanbei.date.JsonVoParser;
+import com.langdunzx.www.zanbei.vo.FriendsDataEntity;
+import com.langdunzx.www.zanbei.vo.FriendsEntity;
 import com.langdunzx.www.zanbei.vo.HomePageBodyVo;
 
 import java.util.HashMap;
@@ -115,31 +117,73 @@ public class Operation {
 	}
 
 	/**
+	 * 上传图片
 	 *
-	 * 助学宝页数据加载
 	 * @param cmd
 	 * @return
-	 *//*
-	@SuppressWarnings("unchecked")
-	public Message executeZXBData(Command cmd) {
+	 */
+	public Message executeUploadPic(Command cmd) {
 		HashMap<String, String> hashMap = (HashMap<String, String>) cmd.param;
-		String jsonString = CallServer.getInstance().callServerldGet(cmd.method,
+		String jsonString = CallServer.getInstance().callServer(cmd.method,
 				hashMap, cmd.context);
 		Message msg = Message.obtain();
 		msg.what = cmd.commandID;
-		ZxbEntityVo zxbEntityVo = JsonVoParser.getInstance().getzxbEntityVo(jsonString);
+//		ImageSaveBodyVo vo = JsonVoParser.getInstance().getImageSaveBodyVo(
+//				jsonString);
 		BaseVo baseVo = JsonVoParser.getInstance().getBasevo(jsonString);
 		if ((null != jsonString) && !"".equals(jsonString) && baseVo != null) {
-			if (baseVo.getSuccess()) {
-				cmd.success = true;
-				cmd.resData = zxbEntityVo;
+			/*if (SUCCESS.equals(vo.getSuccess())) {
+				cmd.isSuccess = true;
+				cmd.resData = vo;
 			} else {
-				cmd.message = baseVo.getMessage();
+				cmd.stateCode = vo.getCode();
+				cmd.resData = vo.getInfo();
+				cmd.isSuccess = false;
+			}*/
+		} else {
+			/*if (baseVo != null) {
+				cmd.stateCode = baseVo.getCode();
+				cmd.resData = baseVo.getInfo();
+				cmd.isSuccess = false;
+			} else {
+				cmd.isSuccess = false;
+				cmd.stateCode = "100001";
+				cmd.resData = cmd.context
+						.getString(R.string.the_network_is_dead);
+			}*/
+		}
+		msg.obj = cmd;
+		return msg;
+
+	}
+
+	/**
+	 *
+	 * 好友列表
+	 * @param cmd
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public Message executeFriendsData(Command cmd) {
+		HashMap<String, String> hashMap = (HashMap<String, String>) cmd.param;
+		String jsonString = CallServer.getInstance().callServer(cmd.method,
+				hashMap, cmd.context);
+		Message msg = Message.obtain();
+		msg.what = cmd.commandID;
+		FriendsDataEntity friendsEntity = JsonVoParser.getInstance().getFriendsData(jsonString);
+//		ZxbEntityVo zxbEntityVo = JsonVoParser.getInstance().getzxbEntityVo(jsonString);
+//		BaseVo baseVo = JsonVoParser.getInstance().getBasevo(jsonString);
+		if ((null != jsonString) && !"".equals(jsonString)) {
+			if (friendsEntity.getSuccess() == 0) {
+				cmd.success = true;
+				cmd.resData = friendsEntity;
+			} else {
+				cmd.message = friendsEntity.getMessage();
 				cmd.success = false;
 			}
 		} else {
-			if (baseVo != null) {
-				cmd.message = baseVo.getMessage();
+			if (friendsEntity != null) {
+				cmd.message = friendsEntity.getMessage();
 				cmd.success = false;
 			} else {
 				cmd.success = false;
@@ -151,7 +195,7 @@ public class Operation {
 		return msg;
 
 	}
-	*//**
+	/**
 	 *
 	 * 助学宝页item数据加载
 	 * @param cmd

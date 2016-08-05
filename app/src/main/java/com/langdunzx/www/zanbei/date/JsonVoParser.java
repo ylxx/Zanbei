@@ -2,6 +2,8 @@ package com.langdunzx.www.zanbei.date;
 
 
 import com.langdunzx.www.zanbei.bean.BaseVo;
+import com.langdunzx.www.zanbei.vo.FriendsDataEntity;
+import com.langdunzx.www.zanbei.vo.FriendsEntity;
 import com.langdunzx.www.zanbei.vo.HomePageBodyVo;
 
 public class JsonVoParser {
@@ -12,7 +14,7 @@ public class JsonVoParser {
 			_jsonVoParser = new JsonVoParser();
 		}
 		return _jsonVoParser;
-	} 
+	}
 	private static JsonBinder jsonBinder = JsonBinder.buildNonNullBinder();
 
 	public BaseVo getBasevo(String jsonvo){
@@ -51,6 +53,11 @@ public class JsonVoParser {
 		public HomePageBodyVo gethoHomePageBodyVo(String json){
 			return jsonBinder.fromJson(json, HomePageBodyVo.class);
 		}
+		//好友信息
+		public FriendsDataEntity getFriendsData(String json){
+			return jsonBinder.fromJson(json, FriendsDataEntity.class);
+		}
+
 
 		/*//首页bottom加载
 		public HomePageBottomEntityVo getHomePageBottomEntityVo(String json){

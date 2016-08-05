@@ -32,10 +32,10 @@ import java.util.Set;
 import java.util.UUID;
 
 public class CallServer {
-	private String HTTP_URL = "http://api.anydo.com/index.php/Home/Api/";// 外网
+	private String HTTP_URL = "http://api.anydo.com/Home/Api/";// 外网
 //	private String HTTP_URL = "http://www.langdunzx.com/";// 外网
-	private String HTTP_URL_HOME_DATA = "http://www.langdunzx.com/";// 首页轮播图
-//	private String HTTP_URL_HOME_DATA = "http://un.ehgo.com/u/255/";// 首页轮播图
+//	private String HTTP_URL_HOME_DATA = "http://www.langdunzx.com/";// 首页轮播图
+	private String HTTP_URL_HOME_DATA = "http://un.ehgo.com/u/255/";// 首页轮播图
 	private static CallServer _callServer;
 
 	public synchronized static CallServer getInstance() {

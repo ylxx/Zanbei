@@ -170,6 +170,10 @@ public class PostAsynTask extends AsyncTask<Command, Integer, Message> {
 		if(Constants.INFORMATION==command.commandID){
 			return operation.executeInformation(command);
 		}
+		//获取好友列表
+		if(Constants.GET_FRIENDS_DATA==command.commandID){
+			return operation.executeFriendsData(command);
+		}
 		//个人头像的更换
 		//	if(Constants.USER_PHOTO==command.commandID){
 			//	return operation.executeUserPhoto(command);

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -21,8 +22,11 @@ import com.langdunzx.www.zanbei.controller.BaseHandler;
 import com.langdunzx.www.zanbei.controller.RequestCommant;
 import com.langdunzx.www.zanbei.fragment.BaseBackFragment;
 import com.langdunzx.www.zanbei.utils.DataServer;
+import com.langdunzx.www.zanbei.vo.FriendsDataEntity;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class FriendFragment extends BaseBackFragment implements BaseQuickAdapter.RequestLoadMoreListener,SwipeRefreshLayout.OnRefreshListener{
 
@@ -35,19 +39,18 @@ public class FriendFragment extends BaseBackFragment implements BaseQuickAdapter
     private int delayMillis = 1000;
     private int mCurrentCounter = 0;
     private FriendsAdapter mAdapter;
+    private List<FriendsDataEntity.FriendsBean> friendsBeens = new ArrayList<>();
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_friends_information,null);
         initView();
-        initAdapter();
-        addHeadView();
-        mRecyclerView.setAdapter(mAdapter);
-        getfriends();
         return view;
     }
 
+
     private void initView() {
+        requestFriendsData();
         mRecyclerView = (RecyclerView) view.findViewById(R.id.rv_list);
         mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipeLayout);
         mSwipeRefreshLayout.setOnRefreshListener(this);
@@ -55,7 +58,7 @@ public class FriendFragment extends BaseBackFragment implements BaseQuickAdapter
     }
 
     private void initAdapter() {
-        mAdapter = new FriendsAdapter(PAGE_SIZE);
+        mAdapter = new FriendsAdapter(friendsBeens);
         mAdapter.openLoadAnimation();
         /**
          * 添加动画
@@ -99,7 +102,7 @@ public class FriendFragment extends BaseBackFragment implements BaseQuickAdapter
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                mAdapter.setNewData(DataServer.getFriendsData(PAGE_SIZE));
+                mAdapter.setNewData(friendsBeens);
                 mAdapter.openLoadMore(PAGE_SIZE, true);
                 mCurrentCounter = PAGE_SIZE;
                 mSwipeRefreshLayout.setRefreshing(false);
@@ -122,7 +125,7 @@ public class FriendFragment extends BaseBackFragment implements BaseQuickAdapter
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            mAdapter.notifyDataChangedAfterLoadMore(DataServer.getFriendsData(PAGE_SIZE), true);
+                            mAdapter.notifyDataChangedAfterLoadMore(friendsBeens, true);
                             mCurrentCounter = mAdapter.getData().size();
                         }
                     }, delayMillis);
@@ -132,31 +135,40 @@ public class FriendFragment extends BaseBackFragment implements BaseQuickAdapter
 
         });
     }
-    private void getfriends(){
-        HashMap<String, String> hashmap = new HashMap<String, String>();
-        hashmap.put("classid","11");
-        hashmap.put("uid","128");
-        new RequestCommant()
-                .requestInformationdata(new requetHandle(getActivity()), getActivity(), hashmap);
+    /**
+     * 获取好友列表
+     */
+    private void requestFriendsData() {
+        friendsBeens.clear();
+        HashMap<String,String> hashMap = new HashMap<>();
+        hashMap.put("","");
+        new RequestCommant().requestFriendsData(new RequestHandler(this),getActivity(),hashMap);
     }
-    private class requetHandle extends BaseHandler {
-        public requetHandle(Activity activity) {
-            super(activity);
-            // TODO Auto-generated constructor stub
+
+    private class RequestHandler extends BaseHandler{
+
+        public RequestHandler(Fragment fragment) {
+            super(fragment);
         }
 
         @Override
         public void handleMessage(Message msg) {
-            // TODO Auto-generated method stub
             super.handleMessage(msg);
-
-            if (msg.what == Constants.LOGIN) {
-                System.out.println(command.success);
-                if (command.success) {
-                    Toast.makeText(getContext(), "返回成功",
-                            Toast.LENGTH_SHORT).show();
+            FriendFragment fragment = (FriendFragment) mFragment.get();
+            if(null != fragment){
+                if(msg.what == Constants.GET_FRIENDS_DATA){
+                    if(command.success){
+                        FriendsDataEntity friendsEntity = (FriendsDataEntity) command.resData;
+                        for (int i = 0;i < friendsEntity.getFriends().size();i ++){
+                            friendsBeens.add(friendsEntity.getFriends().get(i));
+                        }
+                        initAdapter();
+                        addHeadView();
+                        mRecyclerView.setAdapter(mAdapter);
+                    }
                 }
             }
+
         }
     }
 }

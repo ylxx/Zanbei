@@ -39,7 +39,7 @@ public class NewsInformationFragment extends BaseBackFragment implements BaseQui
         view = inflater.inflate(R.layout.fragment_news_information,null);
         initView();
         initAdapter();
-        addHeadView();
+//        addHeadView();
         mRecyclerView.setAdapter(mAdapter);
 
         return view;
@@ -69,7 +69,7 @@ public class NewsInformationFragment extends BaseBackFragment implements BaseQui
         mCurrentCounter = mAdapter.getData().size();
         mAdapter.setOnLoadMoreListener(this);
         mAdapter.openLoadMore(PAGE_SIZE, true);//or call mQuickAdapter.setPageSize(PAGE_SIZE);  mQuickAdapter.openLoadMore(true);
-        addHeadView();
+//        addHeadView();
         mAdapter.setOnRecyclerViewItemClickListener(new BaseQuickAdapter.OnRecyclerViewItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {

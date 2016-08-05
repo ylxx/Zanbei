@@ -105,4 +105,6 @@ public class Constants {
 	public static final int SEARCH=++INIT_POST_IDENTIFIER;
 	//用户查询
 	public static final int WXLOGIN=++INIT_POST_IDENTIFIER;
+	//好友列表
+	public static final int GET_FRIENDS_DATA=++INIT_POST_IDENTIFIER;
 }

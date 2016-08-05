@@ -1,30 +1,31 @@
 package com.langdunzx.www.zanbei.adapter;
 
-import android.widget.ImageView;
-
-import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.langdunzx.www.zanbei.R;
-import com.langdunzx.www.zanbei.utils.DataServer;
-import com.langdunzx.www.zanbei.utils.GlideCircleTransform;
-import com.langdunzx.www.zanbei.vo.FriendsEntity;
+import com.langdunzx.www.zanbei.vo.FriendsDataEntity;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by cuiyinglai on 16/7/22.
  */
-public class FriendsAdapter extends BaseQuickAdapter<FriendsEntity>{
+public class FriendsAdapter extends BaseQuickAdapter<FriendsDataEntity.FriendsBean>{
 
-    public FriendsAdapter() {
-        super( R.layout.item_friends_information, DataServer.getFriendsData(100));
+    private List<FriendsDataEntity.FriendsBean> friendsBeens = new ArrayList<>();
+
+    public FriendsAdapter(List<FriendsDataEntity.FriendsBean> friendsBeens) {
+        super( R.layout.item_friends_information, friendsBeens);
     }
 
-    public FriendsAdapter(int dataSize) {
-        super( R.layout.item_friends_information, DataServer.getFriendsData(dataSize));
-    }
+   /* public FriendsAdapter(int dataSise, FriendsDataEntity  friendsDataEntity){
+        super(R.layout.item_friends_information,);
+
+    }*/
 
     @Override
-    protected void convert(BaseViewHolder helper, FriendsEntity item) {
+    protected void convert(BaseViewHolder helper, FriendsDataEntity.FriendsBean item) {
 
         helper.setText(R.id.friends_name,item.getName()).
                 setOnClickListener(R.id.friends_rl,new OnItemChildClickListener());

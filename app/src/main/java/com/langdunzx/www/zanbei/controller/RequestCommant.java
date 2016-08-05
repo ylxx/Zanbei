@@ -57,6 +57,17 @@ public class RequestCommant {
 		PostAsynTask mPostAsynTask = new PostAsynTask(context, command);
 		mPostAsynTask.execute();    	     	 
 	}
+	//6.3 首页数据接口
+	public void requestFriendsData(BaseHandler handler,Context context,HashMap<String, String> paramHashMap){
+		Command command = new Command(Constants.GET_FRIENDS_DATA, handler);
+		command.param = paramHashMap;
+		command.method = "peoplelist/uid/13718141869/userid/2";
+		command.waitingMsg = "加载中，请稍候...";
+		command.showDialog = true;
+		command.context = context;
+		PostAsynTask mPostAsynTask = new PostAsynTask(context, command);
+		mPostAsynTask.execute();
+	}
 	//助学宝页数据接口
 	public void requestZXBData(BaseHandler handler,Context context,HashMap<String, String> paramHashMap){
 		Command command = new Command(Constants.ZXB_DATA, handler); 
