@@ -15,11 +15,6 @@
             android:layout_height="match_parent"
             android:background="@color/gray" >
 
-
-
-
-
-
             <RelativeLayout
                 android:id="@+id/rl_one"
                 android:layout_width="match_parent"
@@ -35,7 +30,7 @@
                     android:layout_alignParentLeft="true"
                     android:layout_centerHorizontal="true"
                     android:layout_margin="@dimen/default_10dp"
-                    android:src="@drawable/freemp4" />
+                    android:src="@drawable/home_icon_freevideo" />
 
                 <TextView
                     android:id="@+id/tv_start_video"
@@ -84,7 +79,7 @@
                     android:layout_alignParentLeft="true"
                     android:layout_centerHorizontal="true"
                     android:layout_margin="@dimen/default_10dp"
-                    android:src="@drawable/freetiku" />
+                    android:src="@drawable/home_icon_practice" />
 
                 <TextView
                     android:id="@+id/tv_"
@@ -143,7 +138,7 @@
                             android:layout_height="55dp"
                             android:layout_centerHorizontal="true"
                             android:layout_margin="@dimen/default_10dp"
-                            android:src="@drawable/kaoshitime" />
+                            android:src="@drawable/home_icon_cources" />
 
                         <TextView
                             android:id="@+id/tv_icon_one"
@@ -172,7 +167,7 @@
                             android:layout_height="55dp"
                             android:layout_centerHorizontal="true"
                             android:layout_margin="@dimen/default_10dp"
-                            android:src="@drawable/kuaijizhichen" />
+                            android:src="@drawable/home_icon_question" />
 
                         <TextView
                             android:id="@+id/tv_icon_two"
@@ -200,7 +195,7 @@
                             android:layout_height="55dp"
                             android:layout_centerHorizontal="true"
                             android:layout_margin="@dimen/default_10dp"
-                            android:src="@drawable/kaoshitime" />
+                            android:src="@drawable/home_icon_guide" />
 
                         <TextView
                             android:id="@+id/tv_icon_three"
@@ -235,7 +230,7 @@
                             android:layout_height="55dp"
                             android:layout_centerHorizontal="true"
                             android:layout_margin="@dimen/default_10dp"
-                            android:src="@drawable/kaoshitime" />
+                            android:src="@drawable/home_icon_examtime" />
 
                         <TextView
                             android:id="@+id/tv_icon_four"
@@ -262,7 +257,7 @@
                             android:layout_height="55dp"
                             android:layout_centerHorizontal="true"
                             android:layout_margin="@dimen/default_10dp"
-                            android:src="@drawable/kuaijizhichen" />
+                            android:src="@drawable/home_icon_class" />
 
                         <TextView
                             android:id="@+id/tv_icon_five"
@@ -291,7 +286,7 @@
                             android:layout_height="55dp"
                             android:layout_centerHorizontal="true"
                             android:layout_margin="@dimen/default_10dp"
-                            android:src="@drawable/kaoshitime" />
+                            android:src="@drawable/home_icon_certificate" />
 
                         <TextView
                             android:id="@+id/tv_icon_six"

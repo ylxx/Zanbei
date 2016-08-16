@@ -99,7 +99,9 @@
         <activity
             android:name=".activity.secondry.NewsInforActivity"
             android:label="@string/title_activity_news_infor"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
+        <activity android:name=".activity.first.GuideActivity" />
+        <activity android:name=".activity.first.TypeActivity"></activity>
     </application>
 
 </manifest>

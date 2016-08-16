@@ -138,7 +138,7 @@ public class PostAsynTask extends AsyncTask<Command, Integer, Message> {
 			tipTextView.setText(this.cmd.waitingMsg);
 		} else {
 			if ("".equals(msg))
-				tipTextView.setText("加载中,请稍侯...");
+				tipTextView.setText("loading...");
 			else {
 				tipTextView.setText(msg);
 			}

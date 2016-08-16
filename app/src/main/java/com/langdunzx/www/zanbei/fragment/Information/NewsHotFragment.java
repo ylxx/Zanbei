@@ -193,13 +193,12 @@ public class NewsHotFragment extends BaseBackFragment implements SwipeRefreshLay
             NewsHotFragment fragment = (NewsHotFragment) mFragment
                     .get();
             if (null != fragment) {
-
                 if (msg.what == Constants.HOME_DATA) {
                     if (command.success) {
                         if(null != command.resData){
                             HomePageBodyVo body = (HomePageBodyVo)command.resData;
                             //轮播图
-                            lsBanner =body.getBody();
+                            lsBanner = body.getBody();
                             if(lsBanner!=null){
                                 for (int i = 0; i < lsBanner.size(); i++) {
                                     //轮播图地址

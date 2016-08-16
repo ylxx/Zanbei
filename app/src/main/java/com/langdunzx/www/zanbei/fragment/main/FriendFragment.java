@@ -1,5 +1,6 @@
 package com.langdunzx.www.zanbei.fragment.main;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Handler;
 import android.os.Message;
@@ -9,24 +10,37 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.langdunzx.www.zanbei.R;
 import com.langdunzx.www.zanbei.adapter.FriendsAdapter;
+import com.langdunzx.www.zanbei.adapter.SortAdapter;
 import com.langdunzx.www.zanbei.config.Constants;
 import com.langdunzx.www.zanbei.controller.BaseHandler;
 import com.langdunzx.www.zanbei.controller.RequestCommant;
 import com.langdunzx.www.zanbei.fragment.BaseBackFragment;
 import com.langdunzx.www.zanbei.utils.DataServer;
+import com.langdunzx.www.zanbei.utils.linkman.AsyncTaskBase;
+import com.langdunzx.www.zanbei.utils.linkman.CharacterParser;
+import com.langdunzx.www.zanbei.utils.linkman.ConstactUtil;
+import com.langdunzx.www.zanbei.utils.linkman.PinyinComparator;
+import com.langdunzx.www.zanbei.view.linkman.LoadingView;
+import com.langdunzx.www.zanbei.view.linkman.SideBar;
 import com.langdunzx.www.zanbei.vo.FriendsDataEntity;
+import com.langdunzx.www.zanbei.vo.SortModel;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class FriendFragment extends BaseBackFragment implements BaseQuickAdapter.RequestLoadMoreListener,SwipeRefreshLayout.OnRefreshListener{
 
@@ -39,6 +53,7 @@ public class FriendFragment extends BaseBackFragment implements BaseQuickAdapter
     private int delayMillis = 1000;
     private int mCurrentCounter = 0;
     private FriendsAdapter mAdapter;
+    private Map<String, String> callRecords;
     private List<FriendsDataEntity.FriendsBean> friendsBeens = new ArrayList<>();
     @Nullable
     @Override
@@ -85,7 +100,12 @@ public class FriendFragment extends BaseBackFragment implements BaseQuickAdapter
     private void addHeadView() {
         View headView = getActivity().getLayoutInflater().inflate(R.layout.head_view_friends, (ViewGroup) mRecyclerView.getParent(), false);
 //        ((TextView)headView.findViewById(R.id.tv)).setText("click use custom loading view");
+        sideBar = (SideBar) headView.findViewById(R.id.sidrbar);
+        dialog = (TextView) headView.findViewById(R.id.dialog);
+        sortListView = (ListView)headView.findViewById(R.id.country_lvcountry);
+        initData();
         final View customLoading = getActivity().getLayoutInflater().inflate(R.layout.custom_loading, (ViewGroup) mRecyclerView.getParent(), false);
+
         headView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -96,6 +116,21 @@ public class FriendFragment extends BaseBackFragment implements BaseQuickAdapter
         });
         mAdapter.addHeaderView(headView);
     }
+    private SideBar sideBar;
+    private TextView dialog;
+    private ListView sortListView;
+    /**
+     * 汉字转换成拼音的类
+     */
+    private CharacterParser characterParser;
+    private List<SortModel> SourceDateList;
+
+    /**
+     * 根据拼音来排列ListView里面的数据类
+     */
+    private PinyinComparator pinyinComparator;
+    private String numberLinkman;
+    private SortAdapter adapter;
 
     @Override
     public void onRefresh() {
@@ -171,4 +206,46 @@ public class FriendFragment extends BaseBackFragment implements BaseQuickAdapter
 
         }
     }
+    private void initData() {
+
+        // 实例化汉字转拼音类
+        characterParser = CharacterParser.getInstance();
+
+        pinyinComparator = new PinyinComparator();
+
+        sideBar.setTextView(dialog);
+
+        // 设置右侧触摸监听
+        sideBar.setOnTouchingLetterChangedListener(new SideBar.OnTouchingLetterChangedListener() {
+
+            @SuppressLint("NewApi")
+            @Override
+            public void onTouchingLetterChanged(String s) {
+                // 该字母首次出现的位置
+                int position = adapter.getPositionForSection(s.charAt(0));
+                if (position != -1) {
+                    sortListView.setSelection(position);
+                }
+            }
+        });
+
+        sortListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+                // 这里要利用adapter.getItem(position)来获取当前position所对应的对象
+                //				Toast.makeText(getApplication(),
+                //						((SortModel)adapter.getItem(position)).getName(),
+                //						Toast.LENGTH_SHORT).show();
+                numberLinkman = callRecords.get(((SortModel) adapter
+                        .getItem(position)).getName());
+                //弹出拨号类型界面
+//                popupWindowType.showAtLocation(root, Gravity.CENTER, 0, 0);
+
+            }
+        });
+
+    }
+
 }

@@ -56,7 +56,6 @@ public class HomeActivity extends BaseFragmentActivity {
 
     private void initFragment() {
         mFragments = new ArrayList<>();
-
         mFragments.add(createFragment1(""));
         mFragments.add(createFragment2(""));
         mFragments.add(createFragment3(""));

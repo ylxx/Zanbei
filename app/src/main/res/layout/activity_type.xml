@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.langdunzx.www.zanbei.activity.first.TypeActivity">
+    <RelativeLayout
+        android:id="@+id/rl_type_shenfen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/default_80dp" >
+
+        <TextView
+            android:id="@+id/tv_type_shenfen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/default_5dp"
+            android:text="选择您的身份"
+            android:textColor="@color/tint_black2"
+            android:textSize="@dimen/default_18sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_type_shenfen"
+            android:layout_centerHorizontal="true"
+            android:text="我们希望为您提供个性化的服务"
+            android:textColor="@color/text_black1"
+            android:textSize="@dimen/default_12sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_type_biaoqian"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/default_80dp"
+        android:visibility="gone" >
+
+        <TextView
+            android:id="@+id/tv_type_biaoqian"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/default_5dp"
+            android:text="选择您的兴趣标签"
+            android:textColor="@color/tint_black2"
+            android:textSize="@dimen/default_18sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_type_biaoqian"
+            android:layout_centerHorizontal="true"
+            android:text="兴趣标签选得越多越准确"
+            android:textColor="@color/text_black1"
+            android:textSize="@dimen/default_12sp" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_type_worker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_type_worker"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/default_50dp"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        >
+
+        <TextView
+            android:id="@+id/tv_type_boy"
+            android:layout_width="@dimen/default_60dp"
+            android:layout_height="@dimen/default_60dp"
+            android:layout_marginRight="@dimen/default_10dp"
+            android:background="@drawable/shape_worker_circle"
+            android:gravity="center"
+            android:text="男生"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/tv_type_girl"
+            android:layout_width="@dimen/default_60dp"
+            android:layout_height="@dimen/default_60dp"
+            android:layout_marginLeft="@dimen/default_10dp"
+            android:background="@drawable/shape_worker_circle"
+            android:gravity="center"
+            android:text="女生"
+            android:textColor="@color/white" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_type_worker"
+        android:layout_width="@dimen/default_70dp"
+        android:layout_height="@dimen/default_70dp"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="@dimen/default_20dp"
+        android:layout_marginRight="@dimen/default_20dp"
+        android:background="@drawable/shape_worker_circle"
+        android:gravity="center"
+        android:text="上班族"
+        android:textColor="@color/white" />
+
+    <TextView
+        android:id="@+id/tv_type_parent"
+        android:layout_width="@dimen/default_70dp"
+        android:layout_height="@dimen/default_70dp"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/tv_type_worker"
+        android:background="@drawable/shape_parent_circle"
+        android:gravity="center"
+        android:text="家长"
+        android:textColor="@color/white" />
+
+    <TextView
+        android:id="@+id/tv_type_preschool"
+        android:layout_width="@dimen/default_60dp"
+        android:layout_height="@dimen/default_60dp"
+        android:layout_toLeftOf="@+id/tv_type_xiaoxue"
+        android:layout_alignBaseline="@+id/tv_type_xiaoxue"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:background="@drawable/shape_parent_circle"
+        android:text="学前"
+        android:visibility="gone" />
+    <TextView
+        android:id="@+id/tv_type_xiaoxue"
+        android:layout_width="@dimen/default_60dp"
+        android:layout_height="@dimen/default_60dp"
+        android:layout_margin="@dimen/default_20dp"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/tv_type_worker"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:background="@drawable/shape_parent_circle"
+        android:text="小学"
+        android:visibility="gone" />
+    <TextView
+        android:id="@+id/tv_type_zhongxue"
+        android:layout_width="@dimen/default_60dp"
+        android:layout_height="@dimen/default_60dp"
+        android:layout_toRightOf="@+id/tv_type_xiaoxue"
+        android:layout_alignBaseline="@+id/tv_type_xiaoxue"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:background="@drawable/shape_parent_circle"
+        android:text="中学"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/type_skip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_margin="@dimen/default_15dp"
+        android:text="跳过"
+        android:textColor="@color/tint_black2"
+        android:textSize="@dimen/default_15dp" />
+
+    <RelativeLayout
+        android:id="@+id/rl_type_follow_back"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/default_15dp"
+        android:visibility="gone" >
+
+        <TextView
+            android:id="@+id/type_ok"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/default_10dp"
+            android:layout_marginLeft="@dimen/default_20dp"
+            android:layout_marginRight="@dimen/default_20dp"
+            android:background="@drawable/shape_bg_blue"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="进入跟谁学"
+            android:textSize="@dimen/default_18sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/type_ok"
+            android:layout_marginLeft="@dimen/default_15dp"
+            android:text="返回"
+            android:textColor="@color/tint_black2"
+            android:textSize="@dimen/default_15dp" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_type_student"
+        android:layout_width="@dimen/default_70dp"
+        android:layout_height="@dimen/default_70dp"
+        android:layout_toLeftOf="@+id/tv_type_worker"
+        android:layout_centerVertical="true"
+        android:background="@drawable/shape_student_circle"
+        android:gravity="center"
+        android:text="学生"
+        android:textColor="@color/white" />
+
+    <TextView
+        android:id="@+id/tv_type_chuzhong"
+        android:layout_width="@dimen/default_60dp"
+        android:layout_height="@dimen/default_60dp"
+        android:layout_toLeftOf="@+id/tv_type_gaozhong"
+        android:layout_alignBaseline="@+id/tv_type_gaozhong"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:background="@drawable/shape_student_circle"
+        android:text="初中"
+        android:visibility="gone" />
+    <TextView
+        android:id="@+id/tv_type_gaozhong"
+        android:layout_width="@dimen/default_60dp"
+        android:layout_height="@dimen/default_60dp"
+        android:layout_margin="@dimen/default_20dp"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/tv_type_student"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:background="@drawable/shape_student_circle"
+        android:text="高中"
+        android:visibility="gone" />
+    <TextView
+        android:id="@+id/tv_type_daxue"
+        android:layout_width="@dimen/default_60dp"
+        android:layout_height="@dimen/default_60dp"
+        android:layout_toRightOf="@+id/tv_type_gaozhong"
+        android:layout_alignBaseline="@+id/tv_type_gaozhong"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:background="@drawable/shape_student_circle"
+        android:text="大学"
+        android:visibility="gone" />
+
+</RelativeLayout>

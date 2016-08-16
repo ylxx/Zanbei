@@ -29,7 +29,7 @@ import java.util.List;
 public class HomePageFragment extends Fragment {
     private ViewPager mViewPager;
     private ViewPagerIndictor mIndictor;
-    private List<String> mTitles ;
+    private List<String> mTitles  = Arrays.asList("课程分类1", "课程分类2", "课程分类3");
     private List<VpSimpleFragment> mContents = new ArrayList<VpSimpleFragment>();
     private FragmentPagerAdapter mAdapter;
     private ImageView ivToOwn,ivXiaoXi,ivSaoMa;
@@ -38,7 +38,6 @@ public class HomePageFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_homepage,null);
-        mTitles = Arrays.asList("课程分类1", "课程分类2", "课程分类3");
         initViews();
         initDatas();
 
@@ -89,7 +88,6 @@ public class HomePageFragment extends Fragment {
 
             }
         });
-
 
         return view;
     }

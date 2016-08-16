@@ -26,13 +26,13 @@ public class NewsHotAdapter extends BaseQuickAdapter<Status>{
 
     @Override
     protected void convert(BaseViewHolder helper, Status item) {
-        helper.setText(R.id.tweetName, item.getUserName())
-                .setText(R.id.tweetText, item.getText())
-                .setText(R.id.tweetDate, item.getCreatedAt())
-                .setVisible(R.id.tweetRT, item.isRetweet())
+        helper.setText(R.id.tweetName, "国财财务管理师")
+                .setImageResource(R.id.tweetText, R.drawable.friend_icon_message)
+                .setImageResource(R.id.tweetText1, R.drawable.icon_eye)
+                .setImageResource(R.id.tweetText2, R.drawable.icon_wallet_balance_small)
                 .setOnClickListener(R.id.tweetAvatar, new OnItemChildClickListener())
                 .setOnClickListener(R.id.tweetName, new OnItemChildClickListener())
-                .linkify(R.id.tweetText);
+                ;
 
         Glide.with(mContext).load(item.getUserAvatar()).crossFade().placeholder(R.mipmap.def_head).transform(new GlideCircleTransform(mContext)).into((ImageView) helper.getView(R.id.tweetAvatar));
     }
